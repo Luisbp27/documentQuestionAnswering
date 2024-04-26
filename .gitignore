@@ -1,0 +1,5 @@
+databases
+models
+data
+.venv
+__pycache__

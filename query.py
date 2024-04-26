@@ -1,6 +1,9 @@
+import vector_db
 
 def main():
-    pass
+    db = vector_db.get_db()
+
+    
 
 if __name__ == "__main__":
     main()

@@ -1,2 +1,0 @@
-naver-clova-ix/donut-base-finetuned-docvqa
-impira/layoutlm-document-qa

@@ -1,4 +1,3 @@
-
 from transformers import AutoTokenizer, AutoModel
 import torch
 
@@ -20,14 +19,6 @@ def get_embeddings(text_chunks):
         # Aquí usamos mean pooling para obtener un único vector por fragmento
         last_hidden_states = outputs.last_hidden_state
         mean_embedding = torch.mean(last_hidden_states, dim=1)
-        embeddings.append(mean_embedding)
+        embeddings.append(mean_embedding.numpy())
 
-    # Convertir la lista de tensores en un tensor
-    embeddings_tensor = torch.cat(embeddings, dim=0)
-    return embeddings_tensor
-
-# Asumiendo que `text_chunks` es la lista de fragmentos de texto obtenida previamente
-# text_chunks = split_text(documentos)
-
-# Obtener embeddings
-# embeddings = get_embeddings(text_chunks)
+    return embeddings

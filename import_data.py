@@ -1,9 +1,8 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.text_splitter import CharacterTextSplitter
 import os
-
-from langchain_community.document_loaders import PyPDFDirectoryLoader
 
 DATA_PATH = "./data"
 
@@ -36,3 +35,38 @@ def split_text(documents: list[Document]):
         print("-----------------\n")
 
     return text_chunks
+
+def load_files():
+    pdf_files = []
+    for file_ in os.listdir(DATA_PATH):
+        if file_.endswith(".pdf"):
+            pdf_files.append(file_)
+
+    files = []
+    for file_ in pdf_files:
+        loader = PyPDFLoader(file_path=os.path.join(DATA_PATH, file_))
+        pages = loader.load()
+        files.append(pages)
+
+    combined_pages = []
+    for file_ in files:
+        file_content = []
+        for page in file_:
+            file_content.append(page.page_content)
+
+        combined_pages.append(str(file_content))
+
+    return combined_pages
+
+def load_files_chunked():
+    pdf_folder_path = "./data"
+    documents = []
+    for file in os.listdir(pdf_folder_path):
+        if file.endswith('.pdf'):
+            pdf_path = os.path.join(pdf_folder_path, file)
+            loader = PyPDFLoader(pdf_path)
+            documents.extend(loader.load())
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
+    chunked_documents = text_splitter.split_documents(documents)
+
+    return chunked_documents

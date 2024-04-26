@@ -3,17 +3,14 @@ import embeddings
 import vector_db
 
 def main():
-    data = import_data.load_data()
+    data_chunks = import_data.load_files_chunked()
 
     # Create embeddings
-    embeddings_ = embeddings.get_embeddings(data)
+    #embeddings_ = embeddings.get_embeddings(data)
 
-    print(f"Embeddings shape: {embeddings_.shape}")
-
+    print(len(data_chunks))
     # Create vector database
-    db = vector_db.VectorDB()
-    for i, embedding in enumerate(embeddings_):
-        db.insert_vector(i, embedding)
+    db = vector_db.VectorDB(data_chunks)
 
     vectors = db.get_all_vectors()
     print(f"Number of vectors: {len(vectors)}")
