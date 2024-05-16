@@ -1,24 +1,12 @@
-from transformers import AutoTokenizer, AutoModel
-import torch
+from langchain_community.embeddings.ollama import OllamaEmbeddings
+from langchain_community.embeddings import GPT4AllEmbeddings
 
-# Cargar el tokenizer y el modelo
-tokenizer = AutoTokenizer.from_pretrained("BAAI/bge-small-en-v1.5")
-model = AutoModel.from_pretrained("BAAI/bge-small-en-v1.5")
 
-def get_embeddings(text_chunks):
-    embeddings = []
-    for text in text_chunks:
-        # Procesar el texto con el tokenizer y crear tensores PyTorch
-        inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=512)
+def get_embedding_function(model_name):
 
-        # Obtener embeddings del modelo
-        with torch.no_grad():
-            outputs = model(**inputs)
+    if model_name == "gpt4":
+        embedding_function = GPT4AllEmbeddings()
+    elif model_name == "ollama":
+        embedding_function = OllamaEmbeddings(model="nomic-embed-text")
 
-        # Usar embeddings del último estado oculto
-        # Aquí usamos mean pooling para obtener un único vector por fragmento
-        last_hidden_states = outputs.last_hidden_state
-        mean_embedding = torch.mean(last_hidden_states, dim=1)
-        embeddings.append(mean_embedding.numpy())
-
-    return embeddings
+    return embedding_function

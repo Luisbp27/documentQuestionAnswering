@@ -1,72 +1,102 @@
-from langchain_community.document_loaders import PyPDFLoader
-from langchain.schema import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.text_splitter import CharacterTextSplitter
+import argparse
 import os
+import shutil
+from langchain.document_loaders.pdf import PyPDFDirectoryLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain.schema.document import Document
+from embeddings import get_embedding_function
+from langchain.vectorstores.chroma import Chroma
 
-DATA_PATH = "./data"
 
-def load_data():
-    pdf_files = []
-    for file in os.listdir(DATA_PATH):
-        if file.endswith(".pdf"):
-            pdf_files.append(file)
+CHROMA_PATH = "database"
+DATA_PATH = "data"
 
-    loader = PyPDFLoader(file_path=DATA_PATH + "/" + pdf_files[0])
 
-    chunks = split_text(loader.load())
+def main():
+    # Create (or update) the data store.
+    documents = load_documents()
+    chunks = split_documents(documents)
+    add_to_chroma(chunks, args.model)
+
+
+def load_documents():
+    document_loader = PyPDFDirectoryLoader(DATA_PATH)
+    return document_loader.load()
+
+
+def split_documents(documents: list[Document]):
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=800,
+        chunk_overlap=80,
+        length_function=len,
+        is_separator_regex=False,
+    )
+    return text_splitter.split_documents(documents)
+
+
+def add_to_chroma(chunks: list[Document], model_name: str):
+    # Load the existing database.
+    db = Chroma(
+        persist_directory=CHROMA_PATH, embedding_function=get_embedding_function(model_name)
+    )
+
+    # Calculate Page IDs.
+    chunks_with_ids = calculate_chunk_ids(chunks)
+
+    # Add or Update the documents.
+    existing_items = db.get(include=[])  # IDs are always included by default
+    existing_ids = set(existing_items["ids"])
+    print(f"Number of existing documents in DB: {len(existing_ids)}")
+
+    # Only add documents that don't exist in the DB.
+    new_chunks = []
+    for chunk in chunks_with_ids:
+        if chunk.metadata["id"] not in existing_ids:
+            new_chunks.append(chunk)
+
+    if len(new_chunks):
+        print(f"👉 Adding new documents: {len(new_chunks)}")
+        new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
+        db.add_documents(new_chunks, ids=new_chunk_ids)
+        db.persist()
+    else:
+        print("✅ No new documents to add")
+
+
+def calculate_chunk_ids(chunks):
+
+    # This will create IDs like "data/monopoly.pdf:6:2"
+    # Page Source : Page Number : Chunk Index
+
+    last_page_id = None
+    current_chunk_index = 0
+
+    for chunk in chunks:
+        source = chunk.metadata.get("source")
+        page = chunk.metadata.get("page")
+        current_page_id = f"{source}:{page}"
+
+        # If the page ID is the same as the last one, increment the index.
+        if current_page_id == last_page_id:
+            current_chunk_index += 1
+        else:
+            current_chunk_index = 0
+
+        # Calculate the chunk ID.
+        chunk_id = f"{current_page_id}:{current_chunk_index}"
+        last_page_id = current_page_id
+
+        # Add it to the page meta-data.
+        chunk.metadata["id"] = chunk_id
 
     return chunks
 
-def split_text(documents: list[Document]):
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=300
-    )
-    chunks = text_splitter.split_documents(documents)
-    print(f"Split {len(documents)} documents into {len(chunks)} chunks.")
 
-    # Extraer solo el texto de cada fragmento
-    text_chunks = [chunk.page_content for chunk in chunks]
+def clear_database():
+    print("✨ Clearing Database")
+    if os.path.exists(CHROMA_PATH):
+        shutil.rmtree(CHROMA_PATH)
 
-    # Si quieres imprimir algunos fragmentos para verificar
-    for i, text in enumerate(text_chunks[:5]):  # Imprime los primeros 5 para verificación
-        print(f"--- Chunk {i+1} ---")
-        print(text)
-        print("-----------------\n")
 
-    return text_chunks
-
-def load_files():
-    pdf_files = []
-    for file_ in os.listdir(DATA_PATH):
-        if file_.endswith(".pdf"):
-            pdf_files.append(file_)
-
-    files = []
-    for file_ in pdf_files:
-        loader = PyPDFLoader(file_path=os.path.join(DATA_PATH, file_))
-        pages = loader.load()
-        files.append(pages)
-
-    combined_pages = []
-    for file_ in files:
-        file_content = []
-        for page in file_:
-            file_content.append(page.page_content)
-
-        combined_pages.append(str(file_content))
-
-    return combined_pages
-
-def load_files_chunked():
-    pdf_folder_path = "./data"
-    documents = []
-    for file in os.listdir(pdf_folder_path):
-        if file.endswith('.pdf'):
-            pdf_path = os.path.join(pdf_folder_path, file)
-            loader = PyPDFLoader(pdf_path)
-            documents.extend(loader.load())
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
-    chunked_documents = text_splitter.split_documents(documents)
-
-    return chunked_documents
+if __name__ == "__main__":
+    main()

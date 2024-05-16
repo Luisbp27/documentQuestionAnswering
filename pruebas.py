@@ -8,12 +8,13 @@ import streamlit as st
 import chromadb
 import os
 
+
 def load_chunk_persist_pdf(model_name) -> Chroma:
-    # Data loading
+    # Data loading
     pdf_folder_path = "./data"
     documents = []
     for file in os.listdir(pdf_folder_path):
-        if file.endswith('.pdf'):
+        if file.endswith(".pdf"):
             pdf_path = os.path.join(pdf_folder_path, file)
             loader = PyPDFLoader(pdf_path)
             documents.extend(loader.load())
@@ -32,12 +33,13 @@ def load_chunk_persist_pdf(model_name) -> Chroma:
         print("Collection already exists")
     vectordb = Chroma.from_documents(
         documents=chunked_documents,
-        embedding=HuggingFaceEmbeddings(model_name = model_name),
-        persist_directory="./databases"
+        embedding=HuggingFaceEmbeddings(model_name=model_name),
+        persist_directory="./databases",
     )
     vectordb.persist()
 
     return vectordb
+
 
 def create_agent_chain(model_name):
     model = AutoModelForSequenceClassification.from_pretrained(model_name)
@@ -61,9 +63,8 @@ st.set_page_config(
     page_icon="🔍",
     layout="centered",
     initial_sidebar_state="auto",
-    menu_items={
-        'About': "# This is a header. This is an *extremely* cool app!"
-    })
+    menu_items={"About": "# This is a header. This is an *extremely* cool app!"},
+)
 st.header("Query PDF Source")
 
 # Embedding selection model
@@ -71,10 +72,13 @@ emb_model_options = ["BAAI/bge-small-en-v1.5"]
 emb_model = st.selectbox("Select Embedding Model", emb_model_options)
 
 # LLM selection model
-llm_model_options = ["impira/layoutlm-document-qa", "naver-clova-ix/donut-base-finetuned-docvqa"]
+llm_model_options = [
+    "impira/layoutlm-document-qa",
+    "naver-clova-ix/donut-base-finetuned-docvqa",
+]
 llm_model = st.selectbox("Select LLM Model", llm_model_options)
 
-form_input = st.text_input('Enter Query')
+form_input = st.text_input("Enter Query")
 submit = st.button("Generate")
 
 if submit:
