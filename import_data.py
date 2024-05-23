@@ -12,11 +12,11 @@ CHROMA_PATH = "database"
 DATA_PATH = "data"
 
 
-def main():
+def populate_database(emb_model: str):
     # Create (or update) the data store.
     documents = load_documents()
     chunks = split_documents(documents)
-    add_to_chroma(chunks, args.model)
+    add_to_chroma(chunks, emb_model)
 
 
 def load_documents():
@@ -63,7 +63,7 @@ def add_to_chroma(chunks: list[Document], model_name: str):
         print("✅ No new documents to add")
 
 
-def calculate_chunk_ids(chunks):
+def calculate_chunk_ids(chunks: list[Document]):
 
     # This will create IDs like "data/monopoly.pdf:6:2"
     # Page Source : Page Number : Chunk Index
@@ -96,7 +96,3 @@ def clear_database():
     print("✨ Clearing Database")
     if os.path.exists(CHROMA_PATH):
         shutil.rmtree(CHROMA_PATH)
-
-
-if __name__ == "__main__":
-    main()
