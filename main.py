@@ -65,9 +65,9 @@ def main():
     # Embedding selection model
     emb_model_options = [
         "gpt4",
-        "ollama_nomic",
-        "ollama_mxbai",
-        "hf_baai"
+        "baai_large",
+        "mxbai",
+        "baai_small"
     ]
     emb_model = st.selectbox("Select Embedding Model", emb_model_options)
 
