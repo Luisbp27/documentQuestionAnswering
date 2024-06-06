@@ -1,10 +1,11 @@
-from langchain_community.embeddings import GPT4AllEmbeddings, HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 
 def get_embedding_function(model_name):
 
     if model_name == "gpt4":
-        embedding_function = GPT4AllEmbeddings()
+        # nomic-ai/gpt4all-falcon
+        embedding_function = HuggingFaceEmbeddings(model_name="BAAI/bge-large-zh-v1.5")
     elif model_name == "baai_large":
         embedding_function = HuggingFaceEmbeddings(model_name="BAAI/bge-large-zh-v1.5")
     elif model_name == "mxbai":

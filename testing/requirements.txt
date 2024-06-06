@@ -1,0 +1,7 @@
+os
+Dataset
+ragas
+langchain-community
+transformers
+chromadb
+pypdf
