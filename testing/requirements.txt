@@ -1,7 +1,7 @@
-os
-Dataset
+datasets
 ragas
 langchain-community
 transformers
 chromadb
 pypdf
+dotenv
