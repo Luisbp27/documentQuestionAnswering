@@ -4,4 +4,4 @@ langchain-community
 transformers
 chromadb
 pypdf
-dotenv
+ollama
