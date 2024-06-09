@@ -15,7 +15,7 @@ Answer the question based only on the following context:
 
 ---
 
-Answer the question based on the above context: {question}
+Answer the question based on the above context and English language: {question}
 """
 
 PROMPT_TEMPLATE_es = """
@@ -25,7 +25,7 @@ Contesta a la pregunta basando tu respuesta en el siguiente contexto:
 
 ---
 
-Contesta la siguiente pregunta, basándote en el contexto anterior: {question}
+Contesta la siguiente pregunta, basándote en el contexto anterior y en idioma Español: {question}
 """
 
 PROMPT_TEMPLATE_cat = """
@@ -35,7 +35,7 @@ Respon a la pregunta basant la teva resposta en el següent context:
 
 ---
 
-Respon a la següent pregunta, basant-te en el context anterior: {question}
+Respon a la següent pregunta, basant-te en el context anterior i en l'idioma Català: {question}
 """
 
 def get_prompt(lang):
@@ -84,17 +84,30 @@ def main():
         """
     )
 
+    st.sidebar.image (
+        "./images/universitas_balearica.png"
+    )
+
     st.sidebar.markdown(
         """
-        ## Author: ## Lluis Barca Pons
-        ## Tutors: ## Dr. Isaac Lera, Dr. Antoni-Jaume Capó
+        # Final Thesis Project: Document Question Answering
+        ## Universitat de les Illes Balears - Degree in Computer Engineering
+        ## 2023/2024
+
+        ## Author:
+        Lluis Barca Pons
+
+        [Linkedin](https://www.linkedin.com/in/luisbarcapons/)
+        [Github](https://www.github.com/Luisbp27)
+
+        ## Tutors:
+        Dr. Isaac Lera, Dr. Antoni-Jaume Capó
         """
     )
 
     st.sidebar.markdown(
         """
-        [Linkedin](https://www.linkedin.com/in/luisbarcapons/)
-        [Github](https://www.github.com/Luisbp27)
+
         """
     )
 
