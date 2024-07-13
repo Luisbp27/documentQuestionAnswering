@@ -16,6 +16,7 @@ def populate_database(emb_model: str):
     documents = load_documents()
     chunks = split_documents(documents)
     add_to_chroma(chunks, emb_model)
+    print("✅ Database populated")
 
 
 def load_documents():
