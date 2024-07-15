@@ -5,6 +5,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from embeddings import get_embedding_function
 from langchain_community.vectorstores import Chroma
+import tqdm
 
 
 CHROMA_PATH = "database"
@@ -26,8 +27,8 @@ def load_documents():
 
 def split_documents(documents: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800,
-        chunk_overlap=80,
+        chunk_size=5000,
+        chunk_overlap=1000,
         length_function=len,
         is_separator_regex=False,
     )
@@ -56,9 +57,13 @@ def add_to_chroma(chunks: list[Document], model_name: str):
 
     if len(new_chunks):
         print(f"👉 Adding new documents: {len(new_chunks)}")
-        new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
-        db.add_documents(new_chunks, ids=new_chunk_ids)
+        #new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
+        with tqdm.tqdm(total=len(new_chunks)) as pbar:
+            for chunk in new_chunks:
+                db.add_documents([chunk], ids=[chunk.metadata["id"]])
+                pbar.update(1)
         db.persist()
+        print("Documents added correctly ✅")
     else:
         print("✅ No new documents to add")
 

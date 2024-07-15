@@ -101,7 +101,7 @@ def main():
         [Github](https://www.github.com/Luisbp27)
 
         ## Tutors:
-        Dr. Isaac Lera, Dr. Antoni-Jaume Capó
+        Dr. Isaac Lera, Dr. Antoni Jaume Capó
         """
     )
 
