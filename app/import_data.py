@@ -59,7 +59,6 @@ def add_to_chroma(chunks: list[Document], model_name: str):
 
     if len(new_chunks):
         print(f"👉 Adding new documents: {len(new_chunks)}")
-        #new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
         with tqdm.tqdm(total=len(new_chunks)) as pbar:
             for chunk in new_chunks:
                 db.add_documents([chunk], ids=[chunk.metadata["id"]])
