@@ -27,8 +27,8 @@ def load_documents():
 
 def split_documents(documents: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=5000,
-        chunk_overlap=1000,
+        chunk_size=1024,
+        chunk_overlap=256,
         length_function=len,
         is_separator_regex=False,
     )
@@ -38,7 +38,9 @@ def split_documents(documents: list[Document]):
 def add_to_chroma(chunks: list[Document], model_name: str):
     # Load the existing database.
     db = Chroma(
-        persist_directory=CHROMA_PATH, embedding_function=get_embedding_function(model_name)
+        persist_directory=CHROMA_PATH,
+        embedding_function=get_embedding_function(model_name),
+
     )
 
     # Calculate Page IDs.

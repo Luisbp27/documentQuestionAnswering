@@ -116,9 +116,9 @@ def main():
 
     # Embedding selection model
     emb_model_options = [
-        "gpt4",
+        "multilingual_large",
         "baai_large",
-        "mxbai",
+        "mxbai_large",
         "baai_small"
     ]
     emb_model = st.selectbox("Select Embedding Model", emb_model_options)
