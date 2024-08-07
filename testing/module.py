@@ -4,8 +4,8 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 def split_documents(documents: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800,
-        chunk_overlap=80,
+        chunk_size=1024,
+        chunk_overlap=258,
         length_function=len,
         is_separator_regex=False,
     )
@@ -41,11 +41,11 @@ def calculate_chunk_ids(chunks: list[Document]):
 
 def get_embedding_function(model_name):
 
-    if model_name == "google":
-        embedding_function = HuggingFaceEmbeddings(model_name="google/canine-c")
+    if model_name == "multilingual_large":
+        embedding_function = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-large")
     elif model_name == "baai_large":
         embedding_function = HuggingFaceEmbeddings(model_name="BAAI/bge-large-zh-v1.5")
-    elif model_name == "mxbai":
+    elif model_name == "mxbai_large":
         embedding_function = HuggingFaceEmbeddings(model_name="mixedbread-ai/mxbai-embed-large-v1")
     elif model_name == "baai_small":
         embedding_function = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")
