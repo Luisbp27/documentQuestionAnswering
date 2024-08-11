@@ -4,7 +4,7 @@ from langchain_community.document_loaders.pdf import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from embeddings import get_embedding_function
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 import tqdm
 
 
@@ -63,7 +63,6 @@ def add_to_chroma(chunks: list[Document], model_name: str):
             for chunk in new_chunks:
                 db.add_documents([chunk], ids=[chunk.metadata["id"]])
                 pbar.update(1)
-        db.persist()
         print("Documents added correctly ✅")
     else:
         print("✅ No new documents to add")

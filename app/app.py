@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 from import_data import populate_database, clear_database
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from embeddings import get_embedding_function
 from langchain.prompts import ChatPromptTemplate
 from langchain_community.llms.ollama import Ollama

@@ -7,3 +7,8 @@ pypdf
 ollama
 streamlit
 langchain-huggingface
+langchain-chroma
+ipywidgets
+pycryptodome
+torchvision
+torchaudio
