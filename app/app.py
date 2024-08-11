@@ -163,4 +163,6 @@ def main():
         st.write(get_llm_response(form_input, db, llm_model, lang))
 
 if __name__ == "__main__":
+    import torch
+    torch.cuda.is_available()
     main()
