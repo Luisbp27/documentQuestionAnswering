@@ -41,13 +41,29 @@ def calculate_chunk_ids(chunks: list[Document]):
 
 def get_embedding_function(model_name):
 
+    model_kwargs = {
+        "device": "cpu",
+    }
+
     if model_name == "multilingual_large":
-        embedding_function = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-large")
+        embedding_function = HuggingFaceEmbeddings(
+            model_name="intfloat/multilingual-e5-large",
+            model_kwargs = model_kwargs
+        )
     elif model_name == "baai_large":
-        embedding_function = HuggingFaceEmbeddings(model_name="BAAI/bge-large-zh-v1.5")
+        embedding_function = HuggingFaceEmbeddings(
+            model_name="BAAI/bge-large-zh-v1.5",
+            model_kwargs = model_kwargs
+        )
     elif model_name == "mxbai_large":
-        embedding_function = HuggingFaceEmbeddings(model_name="mixedbread-ai/mxbai-embed-large-v1")
+        embedding_function = HuggingFaceEmbeddings(
+            model_name="mixedbread-ai/mxbai-embed-large-v1",
+            model_kwargs = model_kwargs
+        )
     elif model_name == "baai_small":
-        embedding_function = HuggingFaceEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+        embedding_function = HuggingFaceEmbeddings(
+            model_name="BAAI/bge-small-en-v1.5",
+            model_kwargs = model_kwargs
+        )
 
     return embedding_function
