@@ -21,7 +21,8 @@ def get_embedding_function(model_name):
     elif model_name == "baai_large":
         embedding_function = HuggingFaceEmbeddings(
             model_name="BAAI/bge-large-zh-v1.5",
-            model_kwargs=model_kwargs)
+            model_kwargs=model_kwargs
+        )
     elif model_name == "mxbai_large":
         embedding_function = HuggingFaceEmbeddings(
             model_name="mixedbread-ai/mxbai-embed-large-v1",
