@@ -1,11 +1,12 @@
 from langchain.schema import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import CharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 
-def split_documents(documents: list[Document]):
+def split_documents(documents: list[Document], chunk_size=1024, chunk_overlap=0):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1024,
-        chunk_overlap=258,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
         length_function=len,
         is_separator_regex=False,
     )
