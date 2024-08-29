@@ -39,8 +39,7 @@ def add_to_chroma(chunks: list[Document], model_name: str):
     # Load the existing database.
     db = Chroma(
         persist_directory=CHROMA_PATH,
-        embedding_function=get_embedding_function(model_name),
-
+        embedding_function=get_embedding_function(model_name)
     )
 
     # Calculate Page IDs.
