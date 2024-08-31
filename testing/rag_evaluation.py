@@ -82,7 +82,7 @@ def create_dataset(db):
 
     return Dataset.from_dict(data_samples)
 
-def main(emb_model, test_num=None):
+def main(test_num=None):
     llm_models = [
         "llama3",
         "mistral",
@@ -93,6 +93,12 @@ def main(emb_model, test_num=None):
     tests_to_run = range(1, 4) if test_num is None else [test_num]
 
     for test in tests_to_run:
+        # Check emb_model
+        if test == 3:
+            emb_model = "multilingual_large"
+        else:
+            emb_model = "mxbaai_large"
+
         # Load the existing database.
         db = Chroma(
             collection_name=f"test{test}",
@@ -134,9 +140,8 @@ def main(emb_model, test_num=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("emb_model", type=str, help="The name of the embedding model to use.")
     parser.add_argument("--test", type=int, choices=range(1, 4), help="The test number to run (1, 2, or 3). If not provided, all tests will be run.")
 
     args = parser.parse_args()
 
-    main(args.emb_model, args.test)
+    main(args.test)
