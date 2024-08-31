@@ -135,7 +135,7 @@ def main(test_num=None):
                 print(f"An error ocurred: {e}")
 
             df_score = score.to_pandas()
-            df_score.to_csv(f"./test{test}/llm/test3_{model}_{emb_model}.csv", index=False)
+            df_score.to_csv(f"./test{test}/llm/test{test}_{model}_{emb_model}.csv", index=False)
 
 
 if __name__ == "__main__":
