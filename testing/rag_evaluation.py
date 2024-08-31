@@ -110,8 +110,8 @@ def main(emb_model, test_num=None):
         embeddings = get_embedding_function(emb_model)
 
         for model in llm_models:
-            print(f"Running test{test} with {model} and {emb_model}")
-            llm = Ollama(model=llm_models[model])
+            print(f"\n ## Running test{test} with {model} and {emb_model} ##")
+            llm = Ollama(model=model)
 
             try:
                 score = evaluate(
@@ -129,7 +129,7 @@ def main(emb_model, test_num=None):
                 print(f"An error ocurred: {e}")
 
             df_score = score.to_pandas()
-            df_score.to_csv(f"./test{test}/llm/test3_{llm_models[model]}_{emb_model}.csv", index=False)
+            df_score.to_csv(f"./test{test}/llm/test3_{model}_{emb_model}.csv", index=False)
 
 
 if __name__ == "__main__":
