@@ -1,8 +1,6 @@
 from langchain.schema import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_text_splitters import CharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
-import pandas as pd
 
 def split_documents(documents: list[Document], chunk_size=1024, chunk_overlap=0):
     text_splitter = RecursiveCharacterTextSplitter(

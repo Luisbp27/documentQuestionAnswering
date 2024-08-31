@@ -1,7 +1,3 @@
-from langchain.schema import Document
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_text_splitters import CharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
 import pandas as pd
 
 def get_df(df_cat_mean, df_en_mean, df_es_mean):

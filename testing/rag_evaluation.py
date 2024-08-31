@@ -90,14 +90,14 @@ def main(test_num=None):
         "gemma"
     ]
 
+    emb_model = "mxbai_large"
+
     tests_to_run = range(1, 4) if test_num is None else [test_num]
 
     for test in tests_to_run:
         # Check emb_model
         if test == 3:
             emb_model = "multilingual_large"
-        else:
-            emb_model = "mxbaai_large"
 
         # Load the existing database.
         db = Chroma(
