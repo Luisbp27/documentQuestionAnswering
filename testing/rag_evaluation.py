@@ -12,7 +12,7 @@ from module import *
 
 def data_loading(num_test, db):
     # Load the documents
-    documents_loader = PyPDFDirectoryLoader("./test{test}/data")
+    documents_loader = PyPDFDirectoryLoader("./test{num_test}/data")
     documents = documents_loader.load()
     print(f"Loaded {len(documents)} documents of test{num_test}")
 
