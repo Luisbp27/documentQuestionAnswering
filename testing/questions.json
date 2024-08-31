@@ -1,0 +1,89 @@
+{
+    "test1": {
+        "cat": [
+            "Quins drets lingüístics reconeix la Constitució Espanyola?",
+            "Què estableix la Constitució Espanyola sobre la detenció preventiva i els drets de les persones detingudes?",
+            "Quins són els valors superiors de l'ordenament jurídic espanyol segons la Constitució?",
+            "Quines condicions específiques es poden aplicar en un contracte indefinit per a persones amb discapacitat?",
+            "Com es defineix i s'estableix la durada del període de prova en un contracte indefinit segons el document?",
+            "Quins drets de bonificació a la Seguretat Social es mencionen per a contractes indefinits celebrats amb treballadors pertanyents al Sistema Nacional de Garantia Juvenil?"
+        ],
+
+        "en": [
+            "What are the conditions under which an employment contract's probationary period may be extended or terminated?",
+            "What are the stipulations for holiday entitlement and the conditions under which holiday can be carried over to the next year?",
+            "What are the employer’s rights concerning termination of employment during and after the probationary period?",
+            "What are the proposed alternatives for the structure and election of the UK Parliament’s Second Chamber?",
+            "What rights are explicitly protected under the proposed Bill of Rights in the document?",
+            "How does the document propose constitutional amendments should be enacted or repealed?"
+        ],
+
+        "es": [
+            "¿Qué derechos lingüísticos reconoce la Constitución Española?",
+            "¿Qué establece la Constitución Española sobre la detención preventiva y los derechos de las personas detenidas?",
+            "¿Cuáles son los valores superiores del ordenamiento jurídico español según la Constitución?",
+            "¿Qué condiciones específicas pueden aplicarse en un contrato indefinido para personas con discapacidad?",
+            "¿Cómo se define y establece la duración del período de prueba en un contrato indefinido según el documento?",
+            "¿Qué derechos de bonificación a la Seguridad Social se mencionan para contratos indefinidos celebrados con trabajadores pertenecientes al Sistema Nacional de Garantía Juvenil?"
+        ]
+    },
+
+    "test2": {
+        "cat": [
+            "Quines són les principals causes de l'augment del PIB de Catalunya el 2022 segons l'informe financer?",
+            "Quins sectors econòmics han tingut una evolució més positiva i quins han patit més durant el 2022?",
+            "Quina és la importància del turisme estranger per a l'economia catalana segons l'informe?",
+            "Com es distribueixen les competències entre l'Estat i la Generalitat de Catalunya segons l'informe financer?",
+            "Com afecta la capacitat fiscal a la distribució de recursos entre comunitats autònomes?",
+            "Quin impacte han tingut les transferències estatals en els ingressos no financers de la Generalitat de Catalunya el 2022?"
+        ],
+
+        "en": [
+            "What were Accenture's total revenues and operating margins for the fourth quarter of fiscal 2023?",
+            "What were the new bookings for Accenture in the fourth quarter of fiscal 2023, and how did they compare to the previous year?",
+            "What revenue trends were observed in Accenture's key geographic markets during the fourth quarter of fiscal 2023?",
+            "What changes occurred in NTT Data's total assets and equity between March 31, 2024, and June 30, 2024?",
+            "How did NTT Data's consolidated financial results for the fiscal year ending March 31, 2025, compare to the previous fiscal year?",
+            "What were the trends in NTT Data's cash flows from operating, investing, and financing activities during the three months ended June 30, 2024?"
+        ],
+
+        "es": [
+            "¿Cuáles son los principales retos estructurales que enfrenta la economía española según el informe del Banco de España?",
+            "¿Cómo se ha comportado la inflación en España durante 2023 y cuáles son las perspectivas para los próximos años?",
+            "¿Cómo se describe el proceso de envejecimiento poblacional en España y cuáles son sus implicaciones económicas?",
+            "¿Qué impacto ha tenido la volatilidad de los precios del petróleo en los resultados financieros de Repsol?",
+            "¿Cómo ha afectado la transición energética a las estrategias y operaciones de Repsol?",
+            "¿Qué medidas ha implementado Repsol para mejorar su sostenibilidad financiera y operativa?"
+        ]
+    },
+
+    "test3": {
+        "cat": [
+            "Quins són els principals medicaments que poden desencadenar o exacerbar la insuficiència cardíaca segons l'article?",
+            "Quins mecanismes estan implicats en la toxicitat miocardíaca induïda per certs fàrmacs?",
+            "Com es categoritzen els medicaments segons el risc de provocar insuficiència cardíaca en pacients amb aquesta patologia?",
+            "Com actuen els inhibidors de l'enzim convertidor d'angiotensina (IECA) en el tractament de la insuficiència cardíaca?",
+            "Per què és important no interrompre el tractament farmacològic de la insuficiència cardíaca fins i tot si els símptomes milloren?",
+            "Com es realitza el seguiment mèdic d'un pacient amb insuficiència cardíaca en tractament farmacològic?"
+        ]
+        ,
+
+        "en": [
+            "What is the fundamental postulate of Einstein's theory of special relativity?",
+            "Explain the mass-energy equivalence formula and its significance in special relativity.",
+            "How does special relativity reconcile with the principle of the constancy of the speed of light in a vacuum?",
+            "Explain the concept of the 'Imitation Game' (Turing Test) and its significance in evaluating machine intelligence.",
+            "What role does the concept of discrete state machines play in Turing's argument about machine intelligence?",
+            "Discuss the significance of the concept of 'universal machines' as introduced by Turing in the context of machine intelligence."
+        ],
+
+        "es": [
+            "¿Qué papel juega la arquitectura von Neumann en la estructura funcional de un ordenador?",
+            "Explica la función de la Unidad de Control (UC) en un CPU y cómo afecta el rendimiento del ordenador.",
+            "¿Cuál es la fórmula que define la ejecución de un programa en un ordenador según las instrucciones y datos de entrada?",
+            "¿Qué es el algoritmo K-means y cómo se utiliza en el contexto del análisis de consumo energético?",
+            "¿Cómo se determina el número óptimo de clústeres en un análisis con K-means?",
+            "¿Qué metodología se utiliza para tratar los datos atípicos antes de aplicar el algoritmo K-means?"
+        ]
+    }
+}
