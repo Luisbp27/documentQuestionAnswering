@@ -108,26 +108,28 @@ def main(emb_model, test_num=None):
 
         # Evaluate the dataset
         embeddings = get_embedding_function(emb_model)
-        llm = Ollama(model=llm_models[test - 1])
 
-        try:
-            score = evaluate(
-                dataset,
-                metrics=[faithfulness, answer_relevancy, context_precision, context_recall],
-                llm=llm,
-                embeddings=embeddings,
-                raise_exceptions=False,
-                run_config=RunConfig(
-                    max_retries=30, # Default is 10
-                    max_wait=180, # Default is 60
-                    #max_workers=64 # Default is 16
+        for model in llm_models:
+            print(f"Running test{test} with {model} and {emb_model}")
+            llm = Ollama(model=llm_models[model])
+
+            try:
+                score = evaluate(
+                    dataset,
+                    metrics=[faithfulness, answer_relevancy, context_precision, context_recall],
+                    llm=llm,
+                    embeddings=embeddings,
+                    raise_exceptions=False,
+                    run_config=RunConfig(
+                        max_retries=30, # Default is 10
+                        max_wait=180, # Default is 60
+                    )
                 )
-            )
-        except Exception as e:
-            print(f"An error ocurred: {e}")
+            except Exception as e:
+                print(f"An error ocurred: {e}")
 
-        df_score = score.to_pandas()
-        df_score.to_csv(f"./test{test}/llm/test3_{llm_models[test - 1]}_{emb_model}.csv", index=False)
+            df_score = score.to_pandas()
+            df_score.to_csv(f"./test{test}/llm/test3_{llm_models[model]}_{emb_model}.csv", index=False)
 
 
 if __name__ == "__main__":
