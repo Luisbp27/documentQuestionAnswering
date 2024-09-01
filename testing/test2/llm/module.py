@@ -11,7 +11,6 @@ def get_df(df_cat_mean, df_en_mean, df_es_mean):
 
 # Función para añadir valores en las barras
 def add_values_labels(ax):
-    for p in ax.patches:
-        ax.annotate(f'{p.get_height():.2f}',
-                    (p.get_x() + p.get_width() / 2., p.get_height()),
-                    ha='center', va='center', xytext=(0, 10), textcoords='offset points')
+    """Añadir etiquetas de valor en la parte superior de cada barra."""
+    for container in ax.containers:
+        ax.bar_label(container, fmt="%.2f", label_type="edge")
