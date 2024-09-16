@@ -1,15 +1,17 @@
-# **Trabajo Final de Grado**: Desarrollo de un modelo basado en Inteligencia Artificial para la realizacón de consultas en lenguaje natural a repositorios masivos de documentos
+# Design and evaluation of an enhanced retrieval generation system for documents
 
-## Autor: Lluís Barca Pons
+## Author: Lluis Barca Pons
 
-## Tutores: Antoni Jaume Capó y Isaac Lera
+## Tutors: Antoni Jaume Capó y Isaac Lera
 
-### Universidad de las Islas Baleares
+### University of Balearic Islands
 
-### Grado en Ingeniería Informática
+### Bachelor's Degree in Computer Science - Bachelor's Thesis 
 
-#### Año académico 2023-24
+#### Academic Year 2023/24
 
 <hr/>
 
-### Resumen
+### Abstract
+
+### How to use
